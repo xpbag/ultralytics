@@ -141,7 +141,11 @@ if __name__ == '__main__':
         3. 训练轮数：{epochs}
         4. 训练耗时：{train_duration:.2f} 分钟
         5. 最佳模型路径：{results.save_dir}
-        6. 最终mAP50：{results.results_dict}
+        6. 最终数据：
+        precision           {results.results_dict.get('metrics/precision(B)')}
+        recall              {results.results_dict.get('metrics/recall(B)')}
+        mAP50               {results.results_dict.get('metrics/mAP50(B)')}
+        mAP50-95            {results.results_dict.get('metrics/mAP50-95(B)')}
         """
         send_train_notification(
             subject=email_subject,

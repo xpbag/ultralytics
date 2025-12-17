@@ -1,0 +1,87 @@
+2025-12-17 15:42:39 - YOLO_Train_Logger - INFO - ==================================================
+2025-12-17 15:42:39 - YOLO_Train_Logger - INFO - 开始初始化YOLO模型...
+2025-12-17 15:42:39 - YOLO_Train_Logger - INFO - 模型配置文件：yolo11n.yaml
+2025-12-17 15:42:39 - YOLO_Train_Logger - INFO - 预训练权重：D:\learningJournal\Detection\ultralytics\ultralytics\xpsUtils\yolo11n.pt
+2025-12-17 15:42:39 - YOLO_Train_Logger - INFO - batchsize：8
+2025-12-17 15:42:39 - YOLO_Train_Logger - INFO - 数据集配置：D:\learningJournal\Detection\ultralytics\ultralytics\cfg\datasets\coco8.yaml
+2025-12-17 15:42:39 - YOLO_Train_Logger - INFO - 训练轮数：1，输入图像尺寸：640
+2025-12-17 15:42:39 - YOLO_Train_Logger - INFO - ==================================================
+2025-12-17 15:42:39 - YOLO_Train_Logger - INFO - 模型加载成功！
+Transferred 499/499 items from pretrained weights
+2025-12-17 15:42:39 - YOLO_Train_Logger - INFO - 启动模型训练...
+New https://pypi.org/project/ultralytics/8.3.239 available  Update with 'pip install -U ultralytics'
+Ultralytics 8.3.235  Python-3.10.14 torch-2.1.0+cu121 CUDA:0 (NVIDIA GeForce RTX 4060 Laptop GPU, 8188MiB)
+engine\trainer: agnostic_nms=False, amp=True, augment=False, auto_augment=randaugment, batch=8, bgr=0.0, box=7.5, cache=False, cfg=None, classes=None, close_mosaic=10, cls=0.5, compile=False, conf=None, copy_paste=0.0, copy_paste_mode=flip, cos_lr=False, cutmix=0.0, data=D:\learningJournal\Detection\ultralytics\ultralytics\cfg\datasets\coco8.yaml, degrees=0.0, deterministic=True, device=None, dfl=1.5, dnn=False, dropout=0.0, dynamic=False, embed=None, epochs=1, erasing=0.4, exist_ok=False, fliplr=0.5, flipud=0.0, format=torchscript, fraction=1.0, freeze=None, half=False, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, imgsz=640, int8=False, iou=0.7, keras=False, kobj=1.0, line_width=None, lr0=0.01, lrf=0.01, mask_ratio=4, max_det=300, mixup=0.0, mode=train, model=yolo11n.yaml, momentum=0.937, mosaic=1.0, multi_scale=False, name=train13, nbs=64, nms=False, opset=None, optimize=False, optimizer=auto, overlap_mask=True, patience=100, perspective=0.0, plots=True, pose=12.0, pretrained=D:\learningJournal\Detection\ultralytics\ultralytics\xpsUtils\yolo11n.pt, profile=False, project=None, rect=False, resume=False, retina_masks=False, save=True, save_conf=False, save_crop=False, save_dir=D:\learningJournal\Detection\ultralytics\runs\detect\train13, save_frames=False, save_json=False, save_period=-1, save_txt=False, scale=0.5, seed=0, shear=0.0, show=False, show_boxes=True, show_conf=True, show_labels=True, simplify=True, single_cls=False, source=None, split=val, stream_buffer=False, task=detect, time=None, tracker=botsort.yaml, translate=0.1, val=True, verbose=True, vid_stride=1, visualize=False, warmup_bias_lr=0.1, warmup_epochs=3.0, warmup_momentum=0.8, weight_decay=0.0005, workers=8, workspace=None
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1       464  ultralytics.nn.modules.conv.Conv             [3, 16, 3, 2]                 
+  1                  -1  1      4672  ultralytics.nn.modules.conv.Conv             [16, 32, 3, 2]                
+  2                  -1  1      6640  ultralytics.nn.modules.block.C3k2            [32, 64, 1, False, 0.25]      
+  3                  -1  1     36992  ultralytics.nn.modules.conv.Conv             [64, 64, 3, 2]                
+  4                  -1  1     26080  ultralytics.nn.modules.block.C3k2            [64, 128, 1, False, 0.25]     
+  5                  -1  1    147712  ultralytics.nn.modules.conv.Conv             [128, 128, 3, 2]              
+  6                  -1  1     87040  ultralytics.nn.modules.block.C3k2            [128, 128, 1, True]           
+  7                  -1  1    295424  ultralytics.nn.modules.conv.Conv             [128, 256, 3, 2]              
+  8                  -1  1    346112  ultralytics.nn.modules.block.C3k2            [256, 256, 1, True]           
+  9                  -1  1    164608  ultralytics.nn.modules.block.SPPF            [256, 256, 5]                 
+ 10                  -1  1    249728  ultralytics.nn.modules.block.C2PSA           [256, 256, 1]                 
+ 11                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 12             [-1, 6]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 13                  -1  1    111296  ultralytics.nn.modules.block.C3k2            [384, 128, 1, False]          
+ 14                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 15             [-1, 4]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 16                  -1  1     32096  ultralytics.nn.modules.block.C3k2            [256, 64, 1, False]           
+ 17                  -1  1     36992  ultralytics.nn.modules.conv.Conv             [64, 64, 3, 2]                
+ 18            [-1, 13]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 19                  -1  1     86720  ultralytics.nn.modules.block.C3k2            [192, 128, 1, False]          
+ 20                  -1  1    147712  ultralytics.nn.modules.conv.Conv             [128, 128, 3, 2]              
+ 21            [-1, 10]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 22                  -1  1    378880  ultralytics.nn.modules.block.C3k2            [384, 256, 1, True]           
+ 23        [16, 19, 22]  1    464912  ultralytics.nn.modules.head.Detect           [80, [64, 128, 256]]          
+YOLO11n summary: 181 layers, 2,624,080 parameters, 2,624,064 gradients, 6.6 GFLOPs
+
+Transferred 499/499 items from pretrained weights
+Freezing layer 'model.23.dfl.conv.weight'
+AMP: running Automatic Mixed Precision (AMP) checks...
+AMP: checks passed 
+train: Fast image access  (ping: 0.10.0 ms, read: 174.565.5 MB/s, size: 50.0 KB)
+train: Scanning D:\learningJournal\Detection\datasets\coco8\labels\train.cache... 4 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 4/4  0.0strain: Scanning D:\learningJournal\Detection\datasets\coco8\labels\train.cache... 4 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 4/4  0.0s
+val: Fast image access  (ping: 0.20.1 ms, read: 140.050.8 MB/s, size: 54.0 KB)
+val: Scanning D:\learningJournal\Detection\datasets\coco8\labels\val.cache... 4 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 4/4  0.0sval: Scanning D:\learningJournal\Detection\datasets\coco8\labels\val.cache... 4 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 4/4  0.0s
+Plotting labels to D:\learningJournal\Detection\ultralytics\runs\detect\train13\labels.jpg... 
+optimizer: 'optimizer=auto' found, ignoring 'lr0=0.01' and 'momentum=0.937' and determining best 'optimizer', 'lr0' and 'momentum' automatically... 
+optimizer: AdamW(lr=0.000119, momentum=0.9) with parameter groups 81 weight(decay=0.0), 88 weight(decay=0.0005), 87 bias(decay=0.0)
+Image sizes 640 train, 640 val
+Using 8 dataloader workers
+Logging results to D:\learningJournal\Detection\ultralytics\runs\detect\train13
+Starting training for 1 epochs...
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+        1/1     0.875G     0.9663       2.35      1.285         18        640: 0% ──────────── 0/1  1.9s        1/1     0.875G     0.9663       2.35      1.285         18        640: 100% ━━━━━━━━━━━━ 1/1 1.9s/it 1.9s        1/1     0.875G     0.9663       2.35      1.285         18        640: 100% ━━━━━━━━━━━━ 1/1 1.9s/it 1.9s
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 1/1 3.7it/s 0.3s                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 1/1 3.7it/s 0.3s
+                   all          4         17      0.586       0.85      0.878      0.634
+
+1 epochs completed in 0.001 hours.
+Optimizer stripped from D:\learningJournal\Detection\ultralytics\runs\detect\train13\weights\last.pt, 5.5MB
+Optimizer stripped from D:\learningJournal\Detection\ultralytics\runs\detect\train13\weights\best.pt, 5.5MB
+
+Validating D:\learningJournal\Detection\ultralytics\runs\detect\train13\weights\best.pt...
+Ultralytics 8.3.235  Python-3.10.14 torch-2.1.0+cu121 CUDA:0 (NVIDIA GeForce RTX 4060 Laptop GPU, 8188MiB)
+YOLO11n summary (fused): 100 layers, 2,616,248 parameters, 0 gradients, 6.5 GFLOPs
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 1/1 8.3it/s 0.1s                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 1/1 8.3it/s 0.1s
+                   all          4         17      0.582       0.85      0.878      0.634
+                person          3         10       0.57        0.6      0.593      0.271
+                   dog          1          1       0.55          1      0.995      0.697
+                 horse          1          2      0.586          1      0.995      0.674
+              elephant          1          2      0.367        0.5      0.695      0.275
+              umbrella          1          1       0.57          1      0.995      0.995
+          potted plant          1          1      0.849          1      0.995      0.895
+Speed: 1.7ms preprocess, 19.4ms inference, 0.0ms loss, 2.3ms postprocess per image
+Results saved to D:\learningJournal\Detection\ultralytics\runs\detect\train13
+2025-12-17 15:43:06 - YOLO_Train_Logger - INFO - ==================================================
+2025-12-17 15:43:06 - YOLO_Train_Logger - INFO - 模型训练完成！
+2025-12-17 15:43:06 - YOLO_Train_Logger - INFO - 训练耗时：0.46 分钟
+2025-12-17 15:43:06 - YOLO_Train_Logger - INFO - 最终训练指标：{'metrics/precision(B)': 0.5820015978288015, 'metrics/recall(B)': 0.85, 'metrics/mAP50(B)': 0.8779420289855072, 'metrics/mAP50-95(B)': 0.6344298260321498, 'fitness': 0.6344298260321498}
+2025-12-17 15:43:06 - YOLO_Train_Logger - INFO - 最佳模型保存路径：D:\learningJournal\Detection\ultralytics\runs\detect\train13
+2025-12-17 15:43:06 - YOLO_Train_Logger - INFO - ==================================================
+2025-12-17 15:43:09 - YOLO_Train_Logger - INFO - 训练提醒邮件发送成功！
