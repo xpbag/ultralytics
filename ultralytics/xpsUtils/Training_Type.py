@@ -47,7 +47,7 @@ def setup_logger(log_dir="./yolo_train_logs"):
 def send_train_notification(
         subject, content,
         sender_email="xyyniao@163.com",
-        sender_password="你的邮箱授权码",
+        sender_password="RVT2g337LNH4chD8",
         receiver_email="xyyniao@qq.com",
         smtp_server="smtp.163.com",
         smtp_port=465
@@ -86,10 +86,11 @@ if __name__ == '__main__':
     logger = setup_logger()
 
     # 训练配置信息
-    model_yaml = "yolo11s.yaml"
-    pretrained_weights = "D:\learningJournal\Detection\\ultralytics\\ultralytics\\xpsUtils\models\\best.pt"
-    data_yaml = "D:\learningJournal\Detection\\ultralytics\\ultralytics\\xpsUtils\dataSet\VisDrone.yaml"
-    epochs = 300
+    model_yaml = "yolo11n.yaml"
+    pretrained_weights = "D:\learningJournal\Detection\\ultralytics\\ultralytics\\xpsUtils\yolo11n.pt"
+    data_yaml = "D:\learningJournal\Detection\\ultralytics\\ultralytics\cfg\datasets\coco8.yaml"
+    batch = 8
+    epochs = 1
     imgsz = 640
 
     try:
@@ -98,6 +99,7 @@ if __name__ == '__main__':
         logger.info("开始初始化YOLO模型...")
         logger.info(f"模型配置文件：{model_yaml}")
         logger.info(f"预训练权重：{pretrained_weights}")
+        logger.info(f"batchsize：{batch}")
         logger.info(f"数据集配置：{data_yaml}")
         logger.info(f"训练轮数：{epochs}，输入图像尺寸：{imgsz}")
         logger.info("=" * 50)
@@ -111,10 +113,13 @@ if __name__ == '__main__':
         start_time = datetime.now()
         results = model.train(
             data=data_yaml,
+            batch=batch,
             epochs=epochs,
             imgsz=imgsz,
             # 可添加其他训练参数，如batch_size、lr0等
         )
+        # 后续优化
+        # print(results)
         end_time = datetime.now()
         train_duration = (end_time - start_time).total_seconds() / 60  # 转换为分钟
 
@@ -122,7 +127,7 @@ if __name__ == '__main__':
         logger.info("=" * 50)
         logger.info("模型训练完成！")
         logger.info(f"训练耗时：{train_duration:.2f} 分钟")
-        logger.info(f"最终训练指标：{results.metrics}")
+        logger.info(f"最终训练指标：{results.results_dict}")
         logger.info(f"最佳模型保存路径：{results.save_dir}")
         logger.info("=" * 50)
 
@@ -132,19 +137,19 @@ if __name__ == '__main__':
         YOLO模型训练已成功完成！
         训练信息汇总：
         1. 模型：{model_yaml}
-        2. 数据集：VisDrone
+        2. 数据集：{data_yaml.split('/')[-1]}
         3. 训练轮数：{epochs}
         4. 训练耗时：{train_duration:.2f} 分钟
         5. 最佳模型路径：{results.save_dir}
-        6. 最终mAP50：{results.metrics.get('mAP50', '未记录')}
+        6. 最终mAP50：{results.results_dict}
         """
         send_train_notification(
             subject=email_subject,
             content=email_content,
             # 请替换为你的邮箱配置
-            sender_email="your_email@163.com",
-            sender_password="your_email_auth_code",
-            receiver_email="target_email@qq.com"
+            sender_email="xyyniao@163.com",
+            sender_password="RVT2g337LNH4chD8",
+            receiver_email="xyyniao@qq.com"
         )
 
     except Exception as e:
@@ -167,7 +172,7 @@ if __name__ == '__main__':
             subject=email_subject,
             content=email_content,
             # 请替换为你的邮箱配置
-            sender_email="your_email@163.com",
-            sender_password="your_email_auth_code",
-            receiver_email="target_email@qq.com"
+            sender_email="xyyniao@163.com",
+            sender_password="RVT2g337LNH4chD8",
+            receiver_email="xyyniao@qq.com"
         )
