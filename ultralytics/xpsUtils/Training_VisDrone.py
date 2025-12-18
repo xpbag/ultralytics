@@ -86,9 +86,9 @@ if __name__ == '__main__':
     logger = setup_logger()
 
     # 训练配置信息
-    model_yaml = "yolo11s.yaml"
-    pretrained_weights = "D:\learningJournal\Detection\\ultralytics\\ultralytics\\xpsUtils\models\\best.pt"
-    data_yaml = "D:\learningJournal\Detection\\ultralytics\\ultralytics\\xpsUtils\dataSet\VisDrone.yaml"
+    model_yaml = "yolo11_cut.yaml"
+    pretrained_weights = r"D:\learningJournal\Detection\ultralytics\runs\detect\train15\weights\best.pt"
+    data_yaml = r"D:\learningJournal\Detection\ultralytics\ultralytics\xpsUtils\dataSet\VisDrone.yaml"
     batch = 8
     epochs = 300
     imgsz = 640
