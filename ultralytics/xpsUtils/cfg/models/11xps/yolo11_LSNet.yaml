@@ -18,13 +18,13 @@ scales: # model compound scaling constants, i.e. 'model=yolo11n.yaml' will call 
 backbone:
   # [from, repeats, module, args]
   - [-1, 1, Stem, [128]] # 0-P1/2
-  - [-1, 1, LSBlock, [16, 1, 4, 1.0, 0, 14]] # 1-P2/4
+  - [-1, 1, LSBlock, [16, 4, 3, 1.0, 0, 14]] # 1-P2/4
   - [-1, 1, Downsample, [256, 2]]
-  - [-1, 1, LSBlock, [16, 2, 4, 2.0, 1, 14]] # 3
+  - [-1, 1, LSBlock, [16, 6, 3, 2.0, 1, 14]] # 3
   - [-1, 1, Downsample, [384, 2]]
-  - [-1, 1, LSBlock, [16, 3, 4, 3.0, 2, 14]] # 5
+  - [-1, 1, LSBlock, [16, 8, 3, 3.0, 2, 14]] # 5
   - [-1, 1, Downsample, [512, 2]]
-  - [-1, 1, LSBlock, [16, 4, 4, 4.0, 3, 14]] # 7
+  - [-1, 1, LSBlock, [16, 10, 4, 4.0, 3, 14]] # 7
   - [-1, 1, SPPF, [512, 5]] # 8
   - [-1, 2, C2PSA, [512]] # 9
 

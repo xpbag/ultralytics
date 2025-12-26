@@ -392,7 +392,9 @@ class DetectionModel(BaseModel):
         self.end2end = getattr(self.model[-1], "end2end", False)
 
         # Build strides
-        self.model = self.model.cuda()
+        # 放置到cuda上
+        if torch.cuda.is_available():
+            self.model = self.model.cuda()
         m = self.model[-1]  # Detect()
         if isinstance(m, Detect):  # includes all Detect subclasses like Segment, Pose, OBB, YOLOEDetect, YOLOESegment
             s = 256  # 2x min stride
@@ -406,8 +408,13 @@ class DetectionModel(BaseModel):
 
             self.model.eval()  # Avoid changing batch statistics until training begins
             m.training = True  # Setting it to True to properly return strides
+            # 将测试张量移动到cuda上
+            test = torch.zeros(1, ch, s, s)
+            if torch.cuda.is_available():
+                m.stride = torch.tensor([s / x.shape[-2] for x in _forward(test.cuda())])  # forward
+            else:
+                m.stride = torch.tensor([s / x.shape[-2] for x in _forward(test)])  # forward
 
-            m.stride = torch.tensor([s / x.shape[-2] for x in _forward(torch.zeros(1, ch, s, s).cuda())])  # forward
             self.stride = m.stride
             self.model.train()  # Set model back to training(default) mode
             m.bias_init()  # only run once
