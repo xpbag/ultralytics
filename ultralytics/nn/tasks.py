@@ -1659,26 +1659,26 @@ def parse_model(d, ch, verbose=True):
             c1 = ch[f]
             c2 = args[0]
             args = [c1, *args[0:]]
-            print("Stem")
-            print(c1)
-            print(c2)
-            print(args)
+            # print("Stem")
+            # print(c1)
+            # print(c2)
+            # print(args)
         elif m is LSBlock:
             c1 = ch[f]
             c2 = c1
             args = [c1, *args[0:]]
-            print("LSBlock")
-            print(c1)
-            print(c2)
-            print(args)
+            # print("LSBlock")
+            # print(c1)
+            # print(c2)
+            # print(args)
         elif m is Downsample:
             c1 = ch[f]
             c2 = args[0]
             args = [c1, *args[0:]]
-            print("Downsample")
-            print(c1)
-            print(c2)
-            print(args)
+            # print("Downsample")
+            # print(c1)
+            # print(c2)
+            # print(args)
         else:
             c2 = ch[f]
 
