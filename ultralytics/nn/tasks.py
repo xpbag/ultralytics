@@ -12,6 +12,9 @@ import torch.nn as nn
 
 from ultralytics.nn.autobackend import check_class_names
 from ultralytics.nn.modules import (
+    Stem,
+    LSBlock,
+    Downsample,
     AIFI,
     C1,
     C2,
@@ -389,6 +392,7 @@ class DetectionModel(BaseModel):
         self.end2end = getattr(self.model[-1], "end2end", False)
 
         # Build strides
+        self.model = self.model.cuda()
         m = self.model[-1]  # Detect()
         if isinstance(m, Detect):  # includes all Detect subclasses like Segment, Pose, OBB, YOLOEDetect, YOLOESegment
             s = 256  # 2x min stride
@@ -402,7 +406,8 @@ class DetectionModel(BaseModel):
 
             self.model.eval()  # Avoid changing batch statistics until training begins
             m.training = True  # Setting it to True to properly return strides
-            m.stride = torch.tensor([s / x.shape[-2] for x in _forward(torch.zeros(1, ch, s, s))])  # forward
+
+            m.stride = torch.tensor([s / x.shape[-2] for x in _forward(torch.zeros(1, ch, s, s).cuda())])  # forward
             self.stride = m.stride
             self.model.train()  # Set model back to training(default) mode
             m.bias_init()  # only run once
@@ -1481,7 +1486,7 @@ def load_checkpoint(weight, device=None, inplace=True, fuse=False):
     # Return model and ckpt
     return model, ckpt
 
-
+# 模型打印，修改
 def parse_model(d, ch, verbose=True):
     """Parse a YOLO model.yaml dictionary into a PyTorch model.
 
@@ -1643,8 +1648,33 @@ def parse_model(d, ch, verbose=True):
             c2 = args[0]
             c1 = ch[f]
             args = [*args[1:]]
+        elif m is Stem:
+            c1 = ch[f]
+            c2 = args[0]
+            args = [c1, *args[0:]]
+            print("Stem")
+            print(c1)
+            print(c2)
+            print(args)
+        elif m is LSBlock:
+            c1 = ch[f]
+            c2 = c1
+            args = [c1, *args[0:]]
+            print("LSBlock")
+            print(c1)
+            print(c2)
+            print(args)
+        elif m is Downsample:
+            c1 = ch[f]
+            c2 = args[0]
+            args = [c1, *args[0:]]
+            print("Downsample")
+            print(c1)
+            print(c2)
+            print(args)
         else:
             c2 = ch[f]
+
 
         m_ = torch.nn.Sequential(*(m(*args) for _ in range(n))) if n > 1 else m(*args)  # module
         t = str(m)[8:-2].replace("__main__.", "")  # module type

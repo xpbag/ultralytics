@@ -101,8 +101,16 @@ from .transformer import (
     TransformerEncoderLayer,
     TransformerLayer,
 )
+from .lsnet import (
+    Stem,
+    LSBlock,
+    Downsample
+)
 
 __all__ = (
+    "Stem",
+    "LSBlock",
+    "Downsample",
     "AIFI",
     "C1",
     "C2",

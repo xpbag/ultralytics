@@ -47,7 +47,8 @@ class Config:
 # 加载超分模型（全局初始化，避免重复加载）
 def load_super_resolution_model(scale=2):
     """加载OpenCV超分模型（EDSR）"""
-    model_path = Config.SR_MODEL_PATH.get(scale, "EDSR_x2.pb")
+    model_path = Config.SR_MODEL_PATH.get(scale)
+    # print(model_path)
     # 检查模型文件是否存在，若不存在则使用默认的ESPCN模型（OpenCV内置）
     if not os.path.exists(model_path):
         print(f"超分模型文件{model_path}不存在，使用OpenCV内置ESPCN模型")
@@ -56,7 +57,7 @@ def load_super_resolution_model(scale=2):
         sr.setModel("espcn", scale)
     else:
         sr = cv2.dnn_superres.DnnSuperResImpl_create()
-        sr.readModel(model_path)
+        sr.readModel(r"D:\learningJournal\Detection\ultralytics\ultralytics\xpsUtils\utils" + "\\" +model_path)
         sr.setModel("edsr", scale)
     return sr
 
